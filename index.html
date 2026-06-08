@@ -1,64 +1,31 @@
 <!DOCTYPE html>
-<html lang="cs">
-<head>
-  <meta charset="UTF-8">
-  <title>Calculator</title>
-</head>
+<html>
 <body>
 
-<h2>Kalkulačka</h2>
-
-<div id="app">
-  <input id="fnum" placeholder="Napište první číslo">
-  <input id="oper" placeholder="Napište operace">
-  <input id="snum" placeholder="Napište druhe číslo">
-
-  <button onclick="runCalc()">OK</button>
-
-  <p id="out"></p>
-
-  <input id="cont" placeholder="Stisknite na 'y', abych pokračovat...">
-  <button onclick="next()">Pokračovat</button>
-</div>
-
 <script>
-let running = true;
+let prodlouzit = 'y';
 
-function runCalc() {
-  let f_num = parseFloat(document.getElementById("fnum").value);
-  let oper = document.getElementById("oper").value;
-  let s_num = parseFloat(document.getElementById("snum").value);
+while (prodlouzit == 'y') {
 
-  let result;
+    let f_num = parseFloat(prompt("Napište první číslo>>"));
+    let oper = prompt("Napište operace>>");
+    let s_num = parseFloat(prompt("Napište druhe číslo>>"));
 
-  if (oper == '+') {
-    result = f_num + s_num;
-  } else if (oper == '-') {
-    result = f_num - s_num;
-  } else if (oper == '*') {
-    result = f_num * s_num;
-  } else if (oper == '/') {
-    result = f_num / s_num;
-  } else {
-    result = "Error";
-  }
+    if (oper == '+') {
+        alert(f_num + s_num);
+    } else if (oper == '-') {
+        alert(f_num - s_num);
+    } else if (oper == '*') {
+        alert(f_num * s_num);
+    } else if (oper == '/') {
+        alert(f_num / s_num);
+    } else {
+        alert("Error");
+    }
 
-  document.getElementById("out").innerText = result;
+    prodlouzit = prompt("Stisknite na 'y', abych pokračovat, nebo jine tlačítko, abych ukončit>>");
 }
 
-function next() {
-  let prodlouzit = document.getElementById("cont").value;
-
-  if (prodlouzit == 'y') {
-    document.getElementById("fnum").value = "";
-    document.getElementById("oper").value = "";
-    document.getElementById("snum").value = "";
-    document.getElementById("out").innerText = "";
-    document.getElementById("cont").value = "";
-  } else {
-    document.getElementById("app").innerHTML = "<h3>Konec programu</h3>";
-  }
-}
 </script>
 
 </body>
