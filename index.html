@@ -1,93 +1,63 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<title>Kalkulačka</title>
-<style>
-    body {
-        font-family: Arial;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: #111;
-        color: white;
-    }
-
-    .box {
-        background: #1c1c1c;
-        padding: 20px;
-        border-radius: 10px;
-        width: 260px;
-        text-align: center;
-    }
-
-    input, select, button {
-        width: 100%;
-        margin: 5px 0;
-        padding: 8px;
-        border: none;
-        border-radius: 5px;
-    }
-
-    button {
-        background: #4caf50;
-        color: white;
-        cursor: pointer;
-    }
-
-    #result {
-        margin-top: 10px;
-        font-size: 18px;
-    }
-</style>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
 </head>
 <body>
 
-<div class="box">
-    <input id="num1" type="number" placeholder="První číslo">
-    <input id="num2" type="number" placeholder="Druhé číslo">
+<h2>Kalkulačka</h2>
 
-    <select id="op">
-        <option value="+">+</option>
-        <option value="-">-</option>
-        <option value="*">*</option>
-        <option value="/">/</option>
-    </select>
+<div id="app">
+  <input id="fnum" placeholder="Napište první číslo">
+  <input id="oper" placeholder="Napište operace">
+  <input id="snum" placeholder="Napište druhe číslo">
 
-    <button onclick="calc()">Spočítat</button>
-    <button onclick="resetCalc()">Další výpočet</button>
+  <button onclick="runCalc()">OK</button>
 
-    <div id="result"></div>
+  <p id="out"></p>
+
+  <input id="cont" placeholder="Stisknite na 'y', abych pokračovat...">
+  <button onclick="next()">Pokračovat</button>
 </div>
 
 <script>
-function calc() {
-    let f_num = parseFloat(document.getElementById("num1").value);
-    let s_num = parseFloat(document.getElementById("num2").value);
-    let oper = document.getElementById("op").value;
+let running = true;
 
-    let res;
+function runCalc() {
+  let f_num = parseFloat(document.getElementById("fnum").value);
+  let oper = document.getElementById("oper").value;
+  let s_num = parseFloat(document.getElementById("snum").value);
 
-    if (oper === "+") {
-        res = f_num + s_num;
-    } else if (oper === "-") {
-        res = f_num - s_num;
-    } else if (oper === "*") {
-        res = f_num * s_num;
-    } else if (oper === "/") {
-        res = f_num / s_num;
-    } else {
-        res = "Error";
-    }
+  let result;
 
-    document.getElementById("result").innerText = res;
+  if (oper == '+') {
+    result = f_num + s_num;
+  } else if (oper == '-') {
+    result = f_num - s_num;
+  } else if (oper == '*') {
+    result = f_num * s_num;
+  } else if (oper == '/') {
+    result = f_num / s_num;
+  } else {
+    result = "Error";
+  }
+
+  document.getElementById("out").innerText = result;
 }
 
-function resetCalc() {
-    document.getElementById("num1").value = "";
-    document.getElementById("num2").value = "";
-    document.getElementById("result").innerText = "";
+function next() {
+  let prodlouzit = document.getElementById("cont").value;
+
+  if (prodlouzit == 'y') {
+    document.getElementById("fnum").value = "";
+    document.getElementById("oper").value = "";
+    document.getElementById("snum").value = "";
+    document.getElementById("out").innerText = "";
+    document.getElementById("cont").value = "";
+  } else {
+    document.getElementById("app").innerHTML = "<h3>Konec programu</h3>";
+  }
 }
 </script>
 
