@@ -1,31 +1,121 @@
 <!DOCTYPE html>
-<html>
-<body>
-
-<script>
-let prodlouzit = 'y';
-
-while (prodlouzit == 'y') {
-
-    let f_num = parseFloat(prompt("Napište první číslo>>"));
-    let oper = prompt("Napište operace>>");
-    let s_num = parseFloat(prompt("Napište druhe číslo>>"));
-
-    if (oper == '+') {
-        alert(f_num + s_num);
-    } else if (oper == '-') {
-        alert(f_num - s_num);
-    } else if (oper == '*') {
-        alert(f_num * s_num);
-    } else if (oper == '/') {
-        alert(f_num / s_num);
-    } else {
-        alert("Error");
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulačka</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
     }
 
-    prodlouzit = prompt("Stisknite na 'y', abych pokračovat, nebo jine tlačítko, abych ukončit>>");
+    .calculator {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        width: 320px;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        box-sizing: border-box;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    #result {
+        margin-top: 15px;
+        font-size: 20px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #continueBox {
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Kalkulačka</h2>
+
+    <input type="number" id="f_num" placeholder="Napište první číslo>>">
+
+    <select id="oper">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <input type="number" id="s_num" placeholder="Napište druhe číslo>>">
+
+    <button onclick="calculate()">Vypočítat</button>
+
+    <div id="result"></div>
+
+    <div id="continueBox">
+        <input type="text" id="prodlouzit"
+               placeholder="Stisknite na 'y', abych pokračovat, nebo jine tlačítko, abych ukončit>>">
+        <button onclick="continueCalc()">Potvrdit</button>
+    </div>
+</div>
+
+<script>
+function calculate() {
+    let f_num = parseFloat(document.getElementById("f_num").value);
+    let oper = document.getElementById("oper").value;
+    let s_num = parseFloat(document.getElementById("s_num").value);
+
+    let result;
+
+    if (oper === "+") {
+        result = f_num + s_num;
+    } else if (oper === "-") {
+        result = f_num - s_num;
+    } else if (oper === "*") {
+        result = f_num * s_num;
+    } else if (oper === "/") {
+        result = f_num / s_num;
+    } else {
+        result = "Error";
+    }
+
+    document.getElementById("result").textContent = result;
+    document.getElementById("continueBox").style.display = "block";
 }
 
+function continueCalc() {
+    let prodlouzit = document.getElementById("prodlouzit").value;
+
+    if (prodlouzit === "y") {
+        document.getElementById("f_num").value = "";
+        document.getElementById("s_num").value = "";
+        document.getElementById("prodlouzit").value = "";
+        document.getElementById("result").textContent = "";
+        document.getElementById("continueBox").style.display = "none";
+    } else {
+        document.querySelector(".calculator").innerHTML =
+            "<h2>Konec programu</h2>";
+    }
+}
 </script>
 
 </body>
